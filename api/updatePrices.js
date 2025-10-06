@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   const ACCESS_TOKEN = process.env.VITE_SHOPIFY_APP_ACCESS_TOKEN;
 
   try {
-    console.log("Starting product price update...");
+    console.log("Fetching products...");
 
     let page = 1;
     let hasMore = true;
@@ -44,6 +44,8 @@ export default async function handler(req, res) {
             `https://${SHOPIFY_STORE}/admin/api/2023-10/products/${product.id}/metafields.json`,
             { headers: { "X-Shopify-Access-Token": ACCESS_TOKEN } }
           );
+
+          console.log('Starting update for' + product.id);
 
           const { metafields } = await metaRes.json();
 
